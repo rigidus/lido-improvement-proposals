@@ -64,7 +64,7 @@ For each of the simplified voting processes, an objection mechanism can be propo
 
 ## Minimum time between the attempts of one user to create a new vote and minimum threshold requirement to start voting
 
-Currently, the one who starts the voting does not incur expenses and does not place a bet. This opens up opportunities for spam. We may require small expenses or blocking tokens to open the voting process. This will make it difficult to create many pools.
+Currently, the one who starts the voting does not incur expenses and does not place a bet. This opens up opportunities for spam. We may require small expenses or blocking tokens to open the voting process. This will make it difficult to create many polls.
 
 ## Change strength of the vote
 
@@ -90,7 +90,7 @@ User voting power **w_i** is linearly decreasing since the moment of lock. So do
 
 The solution is compatible with the current voting process in Aragon and requires minimal changes to adapt
 
-### Disdvantages
+### Disadvantages
 
 Curve-aragon-voting, which we are adapting, is not a mature solution, it is supported by 3 contributors and I am one of them, because I corrected several links to the documentation. The fact that a random person stumbled upon this does not speak in favor of the polished solution. The main work was carried out until August last year, now there are rare commits. The project does not support by big community, there are no pull requests
 
