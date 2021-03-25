@@ -9,19 +9,19 @@ created: 2021-03-20
 
 # Motivation
 
-Some of the problems of DAO governance became apparent in the context of the high gas price and analysis of the actor's behavior. We can solve them with relatively little effort.
+Some of the problems of DAO governance became apparent in the context of the high gas price and analysis of the actors' behavior. We can solve them with relatively little effort.
 
 ## Problem with current governance process
 
-* The cost of voting on technical issues (increasing the number of validator keys) is excessive compared to the benefit
-* Voting does not work like real governance and is often used only to confirm decisions that have already been made.
+* The cost of voting on non-contentious issues (e.g. increasing the number of validator keys) is excessive
+* Voting does not follow real ebb and flow of the governance and is often used only to rubberstamp an existing consensus.
 * There is a theoretical vulnerability of the current voting process, when an attacker votes above the threshold number of tokens "at the last moment" to carry out his proposal
-* There is no limit on the number of votes that can be submitted, which provokes spam
+* There is no limit on the number of votes that can be submitted, which makes voting spam a potential issue
 * It is necessary to monitor the enactment of votes
 
 ## How they can be solved
 
-- Split the voting process into "general voting" and rate limited "easy-tracks" for technical confirmation votes.
+- Split the voting process into "general voting" and rate-limited "easy-tracks" for non-contentious domain-specific confirmation votes.
 - Implement the process of transition from easy-track to general voting, if objections are found
 - For "general voting" implement a minimum time between the attempts of one user to create a new vote
 - Require a minimum threshold of ownership of LDO tokens to create a vote. These tokens can be locked at the time of voting
@@ -32,19 +32,19 @@ Some of the problems of DAO governance became apparent in the context of the hig
 
 To improve the voting process and eliminate shortcomings, it is proposed to make the changes described below
 
-## Easy-track for technical confirmation votes
+## Easy-track for non-contentious votes
 
-Most of the votes are technical in nature and are held with a minimum number of votes to minimize gas costs. To improve the efficiency of such voting, it is proposed to organize a cheap easy-track process.
+Most of the votes are non-contentious and are held with a minimum number of votes to minimize gas costs. To improve the efficiency of such voting, it is proposed to organize a cheap easy-track process.
 
 In this process, a proposal is passed if it is submitted by a proposer with a specific role and no objection has been received.
 
-We can set up a minimum objection threshold that will make a fallback to the general vote.
+We can set up a minimum objection threshold that will make a fallback to the general vote, or a plain dismissal of the proposal.
 
-This method is only suitable for rate limited voting and not suitable for time sensitive voting
+Due to security considerations this method should be rate limited voting and should not be used for time sensitive proposals
 
-It is supposed to use an easy-track voting for:
-- Key requests from validators (the validator asks for the keys, if there is no objection - the keys are provided)
-- Grant programm (grants are allowed for gnosis safe multisig, if there is no objection )
+A few kinds of poroposal that qualify for easy-track:
+- Key limit increase requests from validators (the validator asks for the key limit increase, if there is no objection - the keys are provided)
+- Grant programm (grants are allowed for the LEGO gnosis safe multisig, if there is no objection )
 - Regular insurance payments (voting calls a specific function of transferring a limited amount of money)
 - Regular payments of rewards
 
