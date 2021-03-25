@@ -72,7 +72,7 @@ Currently we are using the standard Aragon voting method, where 1 token = 1 vote
 
 The corresponding scheme can be adapted from curve-aragon-voting (https://github.com/curvefi/curve-aragon-voting)
 
-Instead of voting with token amount **a**, voting tokens are lockable in a **VotingEscrow** for a selectable locktime **t-lock**, where **T_lock < T_max**.
+Instead of voting with token amount **a**, voting tokens are lockable in a **VotingEscrow** for a selectable locktime **t-lock**, where **T_lock < T_max**. Thus, it will not be possible to change your vote during this time.
 
 The voting weight is equal to:
 
@@ -89,6 +89,8 @@ User voting power **w_i** is linearly decreasing since the moment of lock. So do
 ### Advantages
 
 The solution is compatible with the current voting process in Aragon and requires minimal changes to adapt
+
+Curve Voting was audited, there is a certificate in the repository
 
 ### Disadvantages
 
