@@ -25,7 +25,6 @@ Some of the problems of DAO governance became apparent in the context of the hig
 - Implement the process of transition from easy-track to general voting, if objections are found
 - For "general voting" implement a minimum time between the attempts of one user to create a new vote
 - Require a minimum threshold of ownership of LDO tokens to create a vote. These tokens can be locked at the time of voting
-- Calculate the strength of the vote as a function decreasing with the voting time
 - Create monitoring of the voting and enactment
 
 # Proposal
@@ -43,10 +42,10 @@ We can set up a minimum objection threshold that will make a fallback to the gen
 Due to security considerations this method should be rate limited voting and should not be used for time sensitive proposals
 
 A few kinds of poroposal that qualify for easy-track:
-- Key limit increase requests from validators (the validator asks for the key limit increase, if there is no objection - the keys are provided)
-- Grant programm (grants are allowed for the LEGO gnosis safe multisig, if there is no objection )
+- [] Key limit increase requests from validators (the validator asks for the key limit increase, if there is no objection - the keys are provided)
+- [] Grant programm (grants are allowed for the LEGO gnosis safe multisig, if there is no objection)
+- [] Regular payments of rewards
 - Regular insurance payments (voting calls a specific function of transferring a limited amount of money)
-- Regular payments of rewards
 
 Voting process can be based on Gnosis Safe + Snapshot + SafeSnap, where "Safe owners" can block easy-track and initiate genereal voting
 
@@ -65,36 +64,6 @@ For each of the simplified voting processes, an objection mechanism can be propo
 ## Minimum time between the attempts of one user to create a new vote and minimum threshold requirement to start voting
 
 Currently, the one who starts the voting does not incur expenses and does not place a bet. This opens up opportunities for spam. We may require small expenses or blocking tokens to open the voting process. This will make it difficult to create many polls.
-
-## Change strength of the vote
-
-Currently we are using the standard Aragon voting method, where 1 token = 1 vote. We can replace this with vote weight as described below.
-
-The corresponding scheme can be adapted from curve-aragon-voting (https://github.com/curvefi/curve-aragon-voting)
-
-Instead of voting with token amount **a**, voting tokens are lockable in a **VotingEscrow** for a selectable locktime **t-lock**, where **T_lock < T_max**. Thus, it will not be possible to change your vote during this time.
-
-The voting weight is equal to:
-
-**w** = **a** (**T** / **T_lock**)
-
-In other words, the vote is both amount and time-weighted, where the time counted is how long the tokens cannot be moved in future
-
-The account which locks the tokens cannot be a smart contract (because can be tradable and/or tokenized), unless it is one of whitelisted smart contracts (for example, widely used multi-signature wallets).
-
-balanceOf() / balanceOfAt() and totalSupply() / totalSupplyAt() return the time-weighted voting weight **w** and the sum of all of those weights **W=∑w_i** respectively. Aragon can interface **VotingEscrow** as if it was a typical governance token
-
-User voting power **w_i** is linearly decreasing since the moment of lock. So does the total voting power **W**.
-
-### Advantages
-
-The solution is compatible with the current voting process in Aragon and requires minimal changes to adapt
-
-Curve Voting was audited, there is a certificate in the repository
-
-### Disadvantages
-
-Curve-aragon-voting, which we are adapting, is not a mature solution, it is supported by 3 contributors and I am one of them, because I corrected several links to the documentation. The fact that a random person stumbled upon this does not speak in favor of the polished solution. The main work was carried out until August last year, now there are rare commits. The project does not support by big community, there are no pull requests
 
 ## Monitoring of the voting
 
