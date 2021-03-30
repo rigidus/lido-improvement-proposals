@@ -73,9 +73,15 @@ To observe voting and activate voting results, there must be a transparent metho
 
 Gnosis Safe is a multi-signature wallet suitable for grant distribution. To transfer money, multiple signatures of several responsible persons are required. These responsible persons ensure the security of grant budgets. The DAO elects these responsible persons (delegates) through a general vote.Delegates can be removed by a general vote. When such a vote is initiated, the distribution authority shall be suspended. 
 
-Snapshot allows communities to do token holder votes off-chain. The voting result is verifiable, and the voting process is tamper-resistant (with votes and relayer receipts stored in IPFS). The main weakness of this approach is that the votes are not submitted and broadcast on chain, so a trusted entity is required to review the final vote count and enact the results. The simplest solution is to trust the delegates, but we can use other methods that complicate the collusion, for example, randomly choosing a trusted entity.
+Snapshot allows communities to do token holder votes off-chain. The voting result is verifiable, and the voting process is tamper-resistant (with votes and relayer receipts stored in IPFS). The main weakness of this approach is that the votes are not submitted and broadcast on chain, so a trusted entity is required to review the final vote count and enact the results. The simplest solution is to trust the delegates, but we can use other methods that complicate the collusion, for example, randomly choosing a trusted entity or using third party service as arbiter (SafeSnap). 
 
-To prevent malicious actions, users will need to make a security deposit when triggering proposals. Other participants can initiate a dispute if conspiracy is suspected, leading to a fallback to a general vote. Details of the fallback mechanism are being worked out.
+To prevent malicious actions, users will need to make a security deposit when triggering proposals. Other participants can initiate a dispute if conspiracy is suspected, leading to a fallback to a general vote. If the trust entity attempts to commit a malicious act that is not consistent with the Easy Track voting results, we should have mechanism to stop it. We can introduce an disputable delay, which sets a temporary blocking period before an action can be performed. During this period of time, anyone can challenge the action and make fallback to general vote. This fallback should require stacking, for preventing malicious fallbacks. The stake will be return, if general vote agree with fallback and malicious trusted entity will be slashed
+
+## Details about Easy Track for validator's key limit increase
+
+To increase the limith of validator keys, we can use "optimistic" voting, which is a simplification of the previous method.
+
+In general, the validator asks for keys and, if there is no objection, receives them. Filing an objection may require staking. In the event that objections are received, a general vote is taken.
 
 # Copyright
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
