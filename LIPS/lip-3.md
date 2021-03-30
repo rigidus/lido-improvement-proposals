@@ -69,5 +69,13 @@ Currently, the one who starts the voting does not incur expenses and does not pl
 
 To observe voting and activate voting results, there must be a transparent method available to participants. At the moment, activation is performed manually. We can create a resource that will track the current votes, the strength of votes and enactment
 
+## Details about Easy Track Grant Distibution
+
+Gnosis Safe is a multi-signature wallet suitable for grant distribution. To transfer money, multiple signatures of several responsible persons are required. These responsible persons ensure the security of grant budgets. The DAO elects these responsible persons (delegates) through a general vote.Delegates can be removed by a general vote. When such a vote is initiated, the distribution authority shall be suspended. 
+
+Snapshot allows communities to do token holder votes off-chain. The voting result is verifiable, and the voting process is tamper-resistant (with votes and relayer receipts stored in IPFS). The main weakness of this approach is that the votes are not submitted and broadcast on chain, so a trusted entity is required to review the final vote count and enact the results. The simplest solution is to trust the delegates, but we can use other methods that complicate the collusion, for example, randomly choosing a trusted entity.
+
+To prevent malicious actions, users will need to make a security deposit when triggering proposals. Other participants can initiate a dispute if conspiracy is suspected, leading to a fallback to a general vote. Details of the fallback mechanism are being worked out.
+
 # Copyright
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
