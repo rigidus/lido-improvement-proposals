@@ -41,25 +41,34 @@ We can set up a minimum objection threshold that will make a fallback to the gen
 
 Due to security considerations this method should be rate limited voting and should not be used for time sensitive proposals
 
-A few kinds of poroposal that qualify for easy-track:
-- [] Key limit increase requests from validators (the validator asks for the key limit increase, if there is no objection - the keys are provided)
-- [] Grant programm (grants are allowed for the LEGO gnosis safe multisig, if there is no objection)
-- [] Regular payments of rewards
+A few kinds of proposal that qualify for easy-track:
+- Key limit increase requests from validators (the validator asks for the key limit increase, if there is no objection - the keys are provided). Filing an objection may require staking.
+- Grant programm (grants are allowed for the LEGO gnosis safe multisig, if there is no objection)
+- Regular payments of rewards
 - Regular insurance payments (voting calls a specific function of transferring a limited amount of money)
 
-Voting process can be based on Gnosis Safe + Snapshot + SafeSnap, where "Safe owners" can block easy-track and initiate genereal voting
+## Easy-track voting starting
 
-A more detailed diagram here: https://miro.medium.com/max/1050/0*hHO_mi5PDsTl1gcS
+To start the easy-track voting, the contract function must be called. Calls should be limited, for example:
+- An easy-track for grants can be triggered by a threshold multisig or Gnosis Safe multisig wallet. To save gas, we can initiate a vote with one transaction that contains proof of K signatures from N (threshold multisig) 
+- Regular payments can be called by an Aragon agent 
+- Any validator can request keys (for itself) using Node Operator Registry
 
-SafeSnap module is an oracle-based solution that looks something like this:
+When voting has started, monitoring must create a notification so that participants can be notified 
 
-- A Gnosis Safe module, where anyone can create a new proposal: an array of multisend transaction payloads.
-- Each proposal is a Reality.eth question asking if (1) the linked Snapshot proposal passed, (2) did the proposal include the payload, and (3) does the payload do what the proposal describes.
-- If the proposal passes on Snapshot, then Reality.eth should resolve to the same outcome, and after a 24 hour cooldown period, the proposal’s transactions are executable by anyone.
+## Voting operation process
 
-## Work with objections
+Active voting exists until its lifetime has expired. 
 
-For each of the simplified voting processes, an objection mechanism can be proposed that would require a general vote. This mechanism will be activated if one (or many) of the objectors asks for a general vote.
+In order to send an objection, the owner of the LDO tokens must make a transaction specifying these tokens. 
+
+There is an attack in which an objector can sell voted tokens and immediately buy new ones in order to vote again. To prevent this, the easy-track contract must make a call to the token manager to prohibit the transfer of these tokens until the end of the voting. 
+
+## End of voting 
+
+When the voting period has expired, the easy-track counts the objections. If they exceed the threshold, then the vote is considered unsuccessful. 
+
+For MVP purposes, we do not need to do an automatic fallback to the general vote, but technically it only requires a call to Aragon. 
 
 ## Minimum time between the attempts of one user to create a new vote and minimum threshold requirement to start voting
 
@@ -69,19 +78,17 @@ Currently, the one who starts the voting does not incur expenses and does not pl
 
 To observe voting and activate voting results, there must be a transparent method available to participants. At the moment, activation is performed manually. We can create a resource that will track the current votes, the strength of votes and enactment
 
-## Details about Easy Track Grant Distibution
+## Details about Gnosis Safe and Snapshot
 
 Gnosis Safe is a multi-signature wallet suitable for grant distribution. To transfer money, multiple signatures of several responsible persons are required. These responsible persons ensure the security of grant budgets. The DAO elects these responsible persons (delegates) through a general vote.Delegates can be removed by a general vote. When such a vote is initiated, the distribution authority shall be suspended. 
 
 Snapshot allows communities to do token holder votes off-chain. The voting result is verifiable, and the voting process is tamper-resistant (with votes and relayer receipts stored in IPFS). The main weakness of this approach is that the votes are not submitted and broadcast on chain, so a trusted entity is required to review the final vote count and enact the results. The simplest solution is to trust the delegates, but we can use other methods that complicate the collusion, for example, randomly choosing a trusted entity or using third party service as arbiter (SafeSnap). 
 
-To prevent malicious actions, users will need to make a security deposit when triggering proposals. Other participants can initiate a dispute if conspiracy is suspected, leading to a fallback to a general vote. If the trust entity attempts to commit a malicious act that is not consistent with the Easy Track voting results, we should have mechanism to stop it. We can introduce an disputable delay, which sets a temporary blocking period before an action can be performed. During this period of time, anyone can challenge the action and make fallback to general vote. This fallback should require stacking, for preventing malicious fallbacks. The stake will be return, if general vote agree with fallback and malicious trusted entity will be slashed
+To prevent malicious actions, users will need to make a security deposit when triggering proposals.
 
-## Details about Easy Track for validator's key limit increase
+## Possible attacks and defence
 
-To increase the limith of validator keys, we can use "optimistic" voting, which is a simplification of the previous method.
-
-In general, the validator asks for keys and, if there is no objection, receives them. Filing an objection may require staking. In the event that objections are received, a general vote is taken.
+A malicious owner of LDO tokens can block all voting easy-track if his tokens exceed the threshold. A DAO can defend against them by putting to a general vote the issue of burning its LDO tokens for malicious conduct. 
 
 # Copyright
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
