@@ -62,7 +62,7 @@ Active voting exists until its lifetime has expired.
 
 To send an objection, the owner of the LDO tokens must make a transaction specifying these tokens. 
 
-There is an attack in which an objector can sell voted tokens and immediately buy new ones to vote again. To prevent this, the easy-track contract must make a call to the token manager to prohibit the transfer of these tokens until the end of the voting. 
+There is an attack in which an objector can sell voted tokens and immediately buy new ones to vote again. To prevent this, the easy-track contract must make a call to the token manager to prohibit the transfer of these tokens until the end of the voting. An even more economical way is to use balances at the time of the block in which voting began. That is, only tokens that have not been moved since the start of voting can vote.
 
 ## End of voting 
 
