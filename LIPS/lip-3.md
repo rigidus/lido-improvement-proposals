@@ -1,6 +1,6 @@
 ---
 lip: 3
-title: Imporvements DAO Governance
+title: Improvements DAO Governance
 status: WIP (draft)
 author: Mikhail Glukhov (@rigidus)
 discussions-to: none
@@ -11,11 +11,11 @@ created: 2021-03-20
 
 Some of the problems of DAO governance became apparent in the context of the high gas price and analysis of the actors' behavior. We can solve them with relatively little effort.
 
-## Problem with current governance process
+## Problem with the current governance process
 
 * The cost of voting on non-contentious issues (e.g. increasing the number of validator keys) is excessive
-* Voting does not follow real ebb and flow of the governance and is often used only to rubberstamp an existing consensus.
-* There is a theoretical vulnerability of the current voting process, when an attacker votes above the threshold number of tokens "at the last moment" to carry out his proposal
+* Voting does not follow the real ebb and flow of the governance and is often used only to rubberstamp an existing consensus.
+* There is a theoretical vulnerability of the current voting process when an attacker votes above the threshold number of tokens "at the last moment" to carry out his proposal
 * There is no limit on the number of votes that can be submitted, which makes voting spam a potential issue
 * It is necessary to monitor the enactment of votes
 
@@ -39,11 +39,11 @@ In this process, a proposal is passed if it is submitted by a proposer with a sp
 
 We can set up a minimum objection threshold that will make a fallback to the general vote, or a plain dismissal of the proposal.
 
-Due to security considerations this method should be rate limited voting and should not be used for time sensitive proposals
+Due to security considerations, this method should be rate-limited voting and should not be used for time-sensitive proposals
 
-A few kinds of proposal that qualify for easy-track:
+A few kinds of the proposal that qualify for easy-track:
 - Key limit increase requests from validators (the validator asks for the key limit increase, if there is no objection - the keys are provided). Filing an objection may require staking.
-- Grant programm (grants are allowed for the LEGO gnosis safe multisig, if there is no objection)
+- Grant programs (grants are allowed for the LEGO gnosis safe multisig if there is no objection)
 - Regular payments of rewards
 - Regular insurance payments (voting calls a specific function of transferring a limited amount of money)
 
@@ -60,9 +60,9 @@ When voting has started, monitoring must create a notification so that participa
 
 Active voting exists until its lifetime has expired. 
 
-In order to send an objection, the owner of the LDO tokens must make a transaction specifying these tokens. 
+To send an objection, the owner of the LDO tokens must make a transaction specifying these tokens. 
 
-There is an attack in which an objector can sell voted tokens and immediately buy new ones in order to vote again. To prevent this, the easy-track contract must make a call to the token manager to prohibit the transfer of these tokens until the end of the voting. 
+There is an attack in which an objector can sell voted tokens and immediately buy new ones to vote again. To prevent this, the easy-track contract must make a call to the token manager to prohibit the transfer of these tokens until the end of the voting. 
 
 ## End of voting 
 
@@ -76,17 +76,17 @@ Currently, the one who starts the voting does not incur expenses and does not pl
 
 ## Monitoring of the voting
 
-To observe voting and activate voting results, there must be a transparent method available to participants. At the moment, activation is performed manually. We can create a resource that will track the current votes, the strength of votes and enactment
+To observe voting and activate voting results, there must be a transparent method available to participants. At the moment, activation is performed manually. We can create a resource that will track the current votes, the strength of votes, and the enactment
 
 ## Details about Gnosis Safe and Snapshot
 
-Gnosis Safe is a multi-signature wallet suitable for grant distribution. To transfer money, multiple signatures of several responsible persons are required. These responsible persons ensure the security of grant budgets. The DAO elects these responsible persons (delegates) through a general vote.Delegates can be removed by a general vote. When such a vote is initiated, the distribution authority shall be suspended. 
+Gnosis Safe is a multi-signature wallet suitable for grant distribution. To transfer money, multiple signatures of several responsible persons are required. These responsible persons ensure the security of grant budgets. The DAO elects these responsible persons (delegates) through a general vote. Delegates can be removed by a general vote. When such a vote is initiated, the distribution authority shall be suspended. 
 
-Snapshot allows communities to do token holder votes off-chain. The voting result is verifiable, and the voting process is tamper-resistant (with votes and relayer receipts stored in IPFS). The main weakness of this approach is that the votes are not submitted and broadcast on chain, so a trusted entity is required to review the final vote count and enact the results. The simplest solution is to trust the delegates, but we can use other methods that complicate the collusion, for example, randomly choosing a trusted entity or using third party service as arbiter (SafeSnap). 
+Snapshot allows communities to do token holder votes off-chain. The voting result is verifiable, and the voting process is tamper-resistant (with votes and relayer receipts stored in IPFS). The main weakness of this approach is that the votes are not submitted and broadcast on-chain, so a trusted entity is required to review the final vote count and enact the results. The simplest solution is to trust the delegates, but we can use other methods that complicate the collision, for example, randomly choosing a trusted entity or using a third party service as an arbiter (SafeSnap). 
 
 To prevent malicious actions, users will need to make a security deposit when triggering proposals.
 
-## Possible attacks and defence
+## Possible attacks and defense
 
 A malicious owner of LDO tokens can block all voting easy-track if his tokens exceed the threshold. A DAO can defend against them by putting to a general vote the issue of burning its LDO tokens for malicious conduct. 
 
