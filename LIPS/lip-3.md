@@ -106,7 +106,7 @@ contract EasyTrack {
 }
 ```
 
-```vyper
+```viper
 # Open Auction
 
 # Auction params
